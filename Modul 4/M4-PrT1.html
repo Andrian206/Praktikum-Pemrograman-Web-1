@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang = "id">
+    <head>
+        <meta charset = "UTF-8">
+        <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+        <title>Form Login Validasi Mahasiswa</title>
+    </head>
+    <body>
+        <h3>Login</h3>
+        <input type = "text" id = "username" class = "form-input" placeholder = "Username">
+        <input type = "password" id = "password" class = "form-input" placeholder = "Password">
+        <button class = "login" onclick = "validasi()">Login</button>
+        <div id = "peringatan" class = "peringatan"></div>
+        <script>
+            function validasi() {
+                let username = document.getElementById("username").value;
+                let password = document.getElementById("password").value;
+                let peringatan = document.getElementById("peringatan");
+                if (username === "") {
+                    peringatan.innerHTML = "Username Harus Diisi!";
+                }
+                if (password === "") {
+                    peringatan.innerHTML = "Password Harus Diisi!";
+                }
+                if (username === "rioatmin" && password === "rio123") {
+                    peringatan.innerHTML = "Login Sukses!";
+                } else {
+                    peringatan.innerHTML = "Username atau Password salah!";
+                }
+            }
+        </script>
+    </body>
+</html>
