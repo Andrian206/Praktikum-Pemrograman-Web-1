@@ -53,6 +53,30 @@
         </style>
     </head>
     <body>
+        <script>
+            function validasi() {
+                let idKamar = document.getElementById("idKamar").value;
+                let tipeKamar = document.getElementById("tipeKamar").value;
+                let fasilitas = document.getElementById("fasilitas").value;
+                let hargaPesanan = document.getElementById("hargaPesanan").value;
+                if (idKamar === "") {
+                    alert("ID Kamar Harus Diisi!")
+                    return;
+                }
+                if (tipeKamar === "-") {
+                    alert("Tipe Kamar Harus Diisi!");
+                    return;
+                }
+                if (hargaPesanan === "") {
+                    alert("Harga Harus Diisi!");
+                    return;
+                }
+                else {
+                    alert("Data Diterima!");
+                    return;
+                }
+            }
+        </script>
         <div class = "form-container">
             <h1>Form Tambah Data</h1>
             <form method = "get">
@@ -79,8 +103,8 @@
                     <input type = "number" id = "hargaPesanan" name = "hargaPesanan" maxlength = "60" required />
                 </div>
                 <div class = "button-group">
-                    <button type = "infoHotel" class = "info-button" onclick = " window.location.href = 'M3-T2info.html'">Kamar & Fasilitas</button>
-                    <button type = "add" class = "add-button">Tambah</button>
+                    <button type = "infoHotel" class = "info-button" onclick = " window.location.href = 'M4-T2info.html'">Kamar & Fasilitas</button>
+                    <button type = "add" class = "add-button" onclick = "validasi()">Tambah</button>
                     <button type = "reset" class = "cancel-button">Batal</button>
                 </div>
             </form>

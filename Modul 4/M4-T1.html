@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang = "id">
+    <head>
+        <meta charset = "UTF-8">
+        <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+        <title>Form Login</title>
+    </head>
+    <body>
+        <h3>Login</h3>
+        <input type = "text" id = "username" class = "form-input" placeholder = "Username">
+        <input type = "password" id = "password" class = "form-input" placeholder = "Password">
+        <button class = "login" onclick = "validasi()">Login</button>
+        <a id = "linksukses" href = "index.html"></a>
+        <a id = "linkgagal" href = "M4-T1.html"></a>
+        <div id = "peringatan" class = "peringatan"></div>
+        <script>
+            function validasi() {
+                let username = document.getElementById("username").value;
+                let password = document.getElementById("password").value;
+                if (username === "") {
+                    alert("Username Harus Diisi!");
+                }
+                if (password === "") {
+                    alert("Password Harus Diisi!");
+                }
+                if (username === "admin" && password === "123") {
+                    alert("Login Sukses!");
+                    document.getElementById("linksukses").click();
+                } else {
+                    alert("Username atau Password salah!");
+                    document.getElementById("linkgagal").click();
+                }
+            }
+        </script>
+    </body>
+</html>
