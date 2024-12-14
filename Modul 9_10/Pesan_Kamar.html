@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang = "id">
+    <head>
+        <meta charset = "UTF-8" />
+        <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+        <title>Form Pemesanan Hotel</title>
+        <style>
+            body {
+                background-color : #ffffff;
+                display : flex;
+                flex-direction : column; 
+                align-items : center;
+                min-height : 100vh;
+                margin : 0;
+                padding : 20px;}
+            .form-container {
+                background-color : #ffffff;
+                padding: 20px ;
+                width : 100%;
+                max-width : 800px; }
+            h1 {
+                color : #000000;}
+            .form-group {
+                display : flex;
+                margin-bottom : 15px;}
+            label {
+                width : 160px;
+                margin-right : 10px;
+                color : #000000;}
+            input[type = "text"], input[type = "number"], input[type = "date"], select {
+                flex-grow : 1;
+                padding : 10px;
+                border-radius : 5px;
+                border : 1px solid #848484;
+                box-sizing : border-box;}
+            .button-group {
+                text-align : center;
+                margin-top : 20px;}
+            button {
+                padding : 10px 20px;
+                font-size : 16px;
+                border-radius : 5px;
+                cursor : pointer;
+                margin : 5px;}
+            .save-button {
+                background-color : #2b91ff;
+                color : rgb(255, 255, 255);}
+            .cancel-button {
+                background-color : #d4aa00;
+                color : rgb(255, 255, 255);}
+            #infoContainer {
+                #infoContainer {
+                    margin-top : 200px;
+                    padding : 20px;
+                    width : 100%;
+                    max-width : 800px;}
+                #infoContainer table {
+                    width : 100%;
+                    border-collapse : collapse;}
+                #infoContainer td {
+                    padding : 8px;}}
+        </style>
+        <script src = "jquery-3.7.1.js"></script>
+        <script>
+            $(document).ready(function() {
+    // Fungsi untuk menampilkan harga berdasarkan tipe kamar
+    function tampilTipe() {
+        var tipeKamar = $("#tipeKamar").val();
+        var harga = 0;
+
+        // Tetapkan harga berdasarkan tipe kamar
+        if (tipeKamar === "STD") harga = 500000;
+        else if (tipeKamar === "DLX") harga = 750000;
+        else if (tipeKamar === "STE") harga = 1000000;
+        else if (tipeKamar === "FMY") harga = 1200000;
+
+        // Perbarui input harga
+        $("#hargaPesanan").val(harga);
+
+        // Hitung ulang total biaya
+        hitung();
+    }
+
+    // Fungsi untuk menghitung total biaya
+    function hitung() {
+        var harga = parseInt($("#hargaPesanan").val()) || 0; // Jika kosong, default ke 0
+        var durasi = parseInt($("#durasiMenginap").val()) || 0; // Default ke 0 jika kosong
+        var breakfast = $("#breakfast").is(":checked");
+        var totalBiaya = harga * durasi;
+
+        // Tambahkan biaya breakfast jika dipilih
+        if (breakfast) totalBiaya += 50000 * durasi;
+
+        // Tambahkan diskon jika durasi > 3 malam
+        if (durasi > 3) totalBiaya *= 0.9; // Diskon 10%
+
+        // Perbarui input total biaya
+        $("#totalBiaya").val(totalBiaya);
+    }
+
+    // Event listener untuk elemen terkait
+    $("#tipeKamar").change(tampilTipe); // Untuk perubahan tipe kamar
+    $("#durasiMenginap").on("input", hitung); // Untuk perubahan durasi menginap
+    $("#breakfast").change(hitung); // Untuk perubahan checkbox breakfast
+
+    // Set nilai awal saat halaman dimuat
+    tampilTipe();
+    hitung();
+});
+
+        </script>
+    </head>
+    <body>
+        <div class = "form-container">
+            <h1>Form Pemesanan Hotel</h1>
+            <form method = "get">
+                <div class = "form-group">
+                    <label for = "idPemesan">ID Pemesan</label>
+                    <input type = "text" id = "idPemesan" name = "idPemesan" maxlength = "100" required />
+                </div>
+
+                <div class = "form-group">
+                    <label for = "namaPemesan">Nama Pemesan</label>
+                    <input type = "text" id = "namaPemesan" name = "namaPemesan" maxlength = "100" required />
+                </div>
+
+                <div class = "form-group">
+                    <label for = "jenKel">Jenis Kelamin</label>
+                    <input type = "radio" id = "jenKel" name = "jenKel" value = "Laki-laki" /> Laki - Laki
+                    <input type = "radio" id = "jenKel" name = "jenKel" value = "Perempuan" /> Perempuan
+                </div>
+
+                <div class = "form-group">
+                    <label for = "noIdentitas">Nomor Identitas</label>
+                    <input type = "number" id = "noIdentitas" name = "noIdentitas" maxlength = "60" required />
+                </div>
+
+                <div class = "form-group">
+                    <label for = "tipeKamar">Tipe Kamar</label>
+                    <select id = "tipeKamar" name = "tipeKamar" required>
+                        <option value = "-" selected>---Pilih---</option>
+                        <option value = "STD">Standard Room</option>
+                        <option value = "DLX">Deluxe Room</option>
+                        <option value = "STE">Suite Room</option>
+                        <option value = "FMY">Family Room</option>
+                    </select>
+                </div>
+
+                <div class = "form-group">
+                    <label for = "hargaPesanan">Harga</label>
+                    <input type = "number" id = "hargaPesanan" name = "hargaPesanan" readonly />
+                </div>
+
+                <div class = "form-group">
+                    <label for = "tglPesanan">Tanggal Pesanan</label>
+                    <input type = "date" id = "tglPesanan" name = "tglPesanan" required />
+                </div>
+
+                <div class = "form-group">
+                    <label for = "durasiMenginap">Durasi Menginap</label>
+                    <input type = "number" id = "durasiMenginap" name = "durasiMenginap" required />
+                    <span>Hari</span>
+                </div>
+
+                <div class = "form-group">
+                    <label for = "breakfast">Termasuk Breakfast</label>
+                    <input type = "checkbox" id = "breakfast" name = "breakfast" />
+                </div>
+
+                <div class = "form-group">
+                    <label for = "totalBiaya">Total Biaya</label>
+                    <input type = "text" id = "totalBiaya" name = "totalBiaya" readonly />
+                </div>
+
+                <div class = "button-group">
+                    <button type = "button" class = "save-button">Simpan</button>
+                    <button type = "reset" class = "cancel-button">Batal</button>
+                </div>
+            </form>
+        </div>
+
+        <div id = "infoContainer"></div>
+    </body>
+</html>

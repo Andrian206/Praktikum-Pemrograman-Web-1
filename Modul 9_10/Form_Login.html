@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang = "id">
+    <head>
+        <meta charset = "UTF-8" />
+        <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+        <title>Queen Hotel Login</title>
+        <link rel = "stylesheet" href = "css/bootstrap.min.css"/>
+        <style>
+            body {
+                background-color : #f8f9fa;
+                display : flex;
+                justify-content : center;
+                align-items : center;
+                height : 100vh;
+                margin : 0;
+            }
+            .form-container {
+                background-color : #ffffff;
+                padding : 20px;
+                width : 100%;
+                max-width : 400px;
+                border : 1px solid #ccc;
+                border-radius : 5px;
+                box-shadow : 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            h1 {
+                color : #333;
+                text-align : center;
+                margin-bottom : 20px;
+            }
+            .form-group {
+                margin-bottom : 15px;
+            }
+            .form-label {
+                margin-bottom : 5px;
+                color : #333;
+            }
+            .form-control {
+                width : 100%;
+                padding : 10px;
+                border-radius : 5px;
+                border : 1px solid #ccc;
+                box-sizing : border-box;
+            }
+            .form-text {
+                color : #6c757d;
+                font-size : 0.875em;
+            }
+            .button-group {
+                text-align : center;
+                margin-top : 20px;
+            }
+            .login-button, .register-button {
+                padding : 10px 20px;
+                font-size : 16px;
+                border-radius : 5px;
+                cursor : pointer;
+                margin : 5px;
+                border : none;
+            }
+            .login-button {
+                background-color : #2b91ff;
+                color : #fff;
+            }
+            .register-button {
+                background-color : #d4aa00;
+                color : #fff;
+            }
+            #infoContainer {
+                margin-top : 20px;
+                padding : 20px;
+                border : 1px solid #ccc;
+                border-radius : 5px;
+                width : 100%;
+                max-width : 800px;
+            }
+            #infoContainer table {
+                width : 100%;
+                border-collapse : collapse;
+            }
+            #infoContainer td {
+                padding : 8px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class = "form-container">
+            <h1>Queen Hotel Login</h1>
+            <form method = "get">
+                <div class = "form-group">
+                    <label for = "inputUsername" class = "form-label">Username</label>
+                    <input type = "text" id = "inputUsername" name = "username" class = "form-control" aria-describedby = "usernameHelpBlock" required>
+                </div>
+                <div class = "form-group">
+                    <label for = "inputPassword" class = "form-label">Password</label>
+                    <input type = "password" id = "inputPassword" name = "password" class = "form-control" aria-describedby = "passwordHelpBlock" required>
+                </div>
+                <div class = "button-group">
+                    <button type = "button" class = "login-button">Login</button>
+                    <button type = "button" class = "register-button">Register</button>
+                </div>
+            </form>
+        </div>
+        <script src = "js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
