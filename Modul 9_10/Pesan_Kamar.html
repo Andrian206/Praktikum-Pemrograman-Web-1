@@ -2,115 +2,147 @@
 <html lang = "id">
     <head>
         <meta charset = "UTF-8" />
-        <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+        <meta name = "viewport" content = "width = device-width, initial-scale = 1.0" />
         <title>Form Pemesanan Hotel</title>
         <style>
             body {
-                background-color : #ffffff;
-                display : flex;
-                flex-direction : column; 
-                align-items : center;
-                min-height : 100vh;
-                margin : 0;
-                padding : 20px;}
-            .form-container {
-                background-color : #ffffff;
-                padding: 20px ;
-                width : 100%;
-                max-width : 800px; }
-            h1 {
-                color : #000000;}
-            .form-group {
-                display : flex;
-                margin-bottom : 15px;}
-            label {
-                width : 160px;
-                margin-right : 10px;
-                color : #000000;}
-            input[type = "text"], input[type = "number"], input[type = "date"], select {
-                flex-grow : 1;
-                padding : 10px;
-                border-radius : 5px;
-                border : 1px solid #848484;
-                box-sizing : border-box;}
-            .button-group {
-                text-align : center;
-                margin-top : 20px;}
-            button {
-                padding : 10px 20px;
-                font-size : 16px;
-                border-radius : 5px;
-                cursor : pointer;
-                margin : 5px;}
-            .save-button {
-                background-color : #2b91ff;
-                color : rgb(255, 255, 255);}
-            .cancel-button {
-                background-color : #d4aa00;
-                color : rgb(255, 255, 255);}
+            background-color : #ffffff;
+            display : flex;
+            flex-direction : column; 
+            align-items : center;
+            min-height : 100vh;
+            margin : 0;
+            padding : 20px;}
+        .form-container {
+            background-color : #ffffff;
+            padding: 20px ;
+            width : 100%;
+            max-width : 800px; }
+        h1 {
+            color : #000000;}
+        .form-group {
+            display : flex;
+            margin-bottom : 15px;}
+        label {
+            width : 160px;
+            margin-right : 10px;
+            color : #000000;}
+        input[type = "text"], input[type = "number"], input[type = "date"], select {
+            flex-grow : 1;
+            padding : 10px;
+            border-radius : 5px;
+            border : 1px solid #848484;
+            box-sizing : border-box;}
+        .button-group {
+            text-align : center;
+            margin-top : 20px;}
+        button {
+            padding : 10px 20px;
+            font-size : 16px;
+            border-radius : 5px;
+            cursor : pointer;
+            margin : 5px;}
+        .save-button {
+            background-color : #2b91ff;
+            color : rgb(255, 255, 255);}
+        .cancel-button {
+            background-color : #d4aa00;
+            color : rgb(255, 255, 255);}
+        #infoContainer {
             #infoContainer {
-                #infoContainer {
-                    margin-top : 200px;
-                    padding : 20px;
-                    width : 100%;
-                    max-width : 800px;}
-                #infoContainer table {
-                    width : 100%;
-                    border-collapse : collapse;}
-                #infoContainer td {
-                    padding : 8px;}}
+                margin-top : 200px;
+                padding : 20px;
+                width : 100%;
+                max-width : 800px;}
+            #infoContainer table {
+                width : 100%;
+                border-collapse : collapse;}
+            #infoContainer td {
+                padding : 8px;}}
         </style>
-        <script src = "jquery-3.7.1.js"></script>
-        <script>
-            $(document).ready(function() {
-    // Fungsi untuk menampilkan harga berdasarkan tipe kamar
-    function tampilTipe() {
-        var tipeKamar = $("#tipeKamar").val();
-        var harga = 0;
-
-        // Tetapkan harga berdasarkan tipe kamar
-        if (tipeKamar === "STD") harga = 500000;
-        else if (tipeKamar === "DLX") harga = 750000;
-        else if (tipeKamar === "STE") harga = 1000000;
-        else if (tipeKamar === "FMY") harga = 1200000;
-
-        // Perbarui input harga
-        $("#hargaPesanan").val(harga);
-
-        // Hitung ulang total biaya
-        hitung();
-    }
-
-    // Fungsi untuk menghitung total biaya
-    function hitung() {
-        var harga = parseInt($("#hargaPesanan").val()) || 0; // Jika kosong, default ke 0
-        var durasi = parseInt($("#durasiMenginap").val()) || 0; // Default ke 0 jika kosong
-        var breakfast = $("#breakfast").is(":checked");
-        var totalBiaya = harga * durasi;
-
-        // Tambahkan biaya breakfast jika dipilih
-        if (breakfast) totalBiaya += 50000 * durasi;
-
-        // Tambahkan diskon jika durasi > 3 malam
-        if (durasi > 3) totalBiaya *= 0.9; // Diskon 10%
-
-        // Perbarui input total biaya
-        $("#totalBiaya").val(totalBiaya);
-    }
-
-    // Event listener untuk elemen terkait
-    $("#tipeKamar").change(tampilTipe); // Untuk perubahan tipe kamar
-    $("#durasiMenginap").on("input", hitung); // Untuk perubahan durasi menginap
-    $("#breakfast").change(hitung); // Untuk perubahan checkbox breakfast
-
-    // Set nilai awal saat halaman dimuat
-    tampilTipe();
-    hitung();
-});
-
-        </script>
     </head>
     <body>
+        <script>
+            function tampilTipe() {
+                var tipeKamar = document.getElementById("tipeKamar").value;
+                var harga;
+                if (tipeKamar === "STD") {
+                    harga = 500000;
+                } else if (tipeKamar === "DLX") {
+                    harga = 750000;
+                } else if (tipeKamar === "STE") {
+                    harga = 1000000;
+                } else if (tipeKamar === "FMY") {
+                    harga = 1200000;
+                }
+                document.getElementById("hargaPesanan").value = harga;
+                hitung();
+            }
+            function validasi() {
+                var noIdentitas = document.getElementById("noIdentitas").value;
+                if (noIdentitas.length < 16) {
+                    alert("Isian salah, harus 16 digit!");
+                    return false;
+                }
+                return true;
+            }
+            function hitung() {
+                var harga = parseInt(document.getElementById("hargaPesanan").value);
+                var durasi = parseInt(document.getElementById("durasiMenginap").value);
+                var breakfast = document.getElementById("breakfast").checked;
+                var totalBiaya = 0;
+                totalBiaya = harga * durasi;
+                if (breakfast) {
+                    totalBiaya = totalBiaya + 50000 * durasi;
+                }
+                if (durasi > 3) {
+                    totalBiaya = totalBiaya * 0.9;
+
+                    if (breakfast) {
+                        totalBiaya = totalBiaya - 80000;
+                    }
+                }
+                document.getElementById("totalBiaya").value = totalBiaya;
+            }
+            function simpanData() {
+                if (!validasi()) {
+                    return;
+                }
+                var idPemesan = document.getElementById("idPemesan").value;
+                var namaPemesan = document.getElementById("namaPemesan").value;
+                var jenisKelamin = document.querySelector('input[name="jenKel"]:checked').value;
+                var noIdentitas = document.getElementById("noIdentitas").value;
+                var tipeKamar = document.getElementById("tipeKamar").value;
+                var tglPesanan = document.getElementById("tglPesanan").value;
+                var durasiMenginap = document.getElementById("durasiMenginap").value;
+                var breakfast = document.getElementById("breakfast").checked ? "Ya" : "Tidak";
+                var totalBiaya = document.getElementById("totalBiaya").value;
+                var diskon = 0;
+                var potongan = 0;
+                if (durasiMenginap > 3) {
+                    diskon = 10;
+                    potongan = totalBiaya * 0.1;
+                    totalBiaya = totalBiaya - potongan;
+                }
+                document.getElementById("infoContainer").innerHTML =
+                `<h2>Data Pemesanan</h2>
+                <table>
+                    <tr><td>ID Pemesan</td><td>: ${idPemesan}</td></tr>
+                    <tr><td>Nama Pemesan </td><td>: ${namaPemesan}</td></tr>
+                    <tr><td>No Identitas </td><td>: ${noIdentitas}</td></tr>
+                    <tr><td>Jenis Kelamin </td><td>: ${jenisKelamin}</td></tr>
+                    <tr><td>Tipe Kamar </td><td>: ${tipeKamar}</td></tr>
+                    <tr><td>Tanggal Pesanan </td><td>: ${tglPesanan}</td></tr>
+                    <tr><td>Durasi Menginap </td><td>: ${durasiMenginap} Hari</td></tr>
+                    <tr><td>Termasuk Breakfast </td><td>: ${breakfast}</td></tr>
+                    <tr><td colspan = "2">-----------------------------------------------------------------------------------------------------------</td></tr>
+                    <tr><td>Diskon </td><td>: ${diskon}%</td></tr>
+                    <tr><td>Potongan </td><td>: Rp ${potongan}</td></tr>
+                    <tr><td colspan = "2">===============================================================</td></tr>
+                    <tr><td>Total Biaya </td><td>: Rp ${totalBiaya}</td></tr>
+                </table>`;
+            }
+        </script>
         <div class = "form-container">
             <h1>Form Pemesanan Hotel</h1>
             <form method = "get">
@@ -118,26 +150,22 @@
                     <label for = "idPemesan">ID Pemesan</label>
                     <input type = "text" id = "idPemesan" name = "idPemesan" maxlength = "100" required />
                 </div>
-
                 <div class = "form-group">
                     <label for = "namaPemesan">Nama Pemesan</label>
                     <input type = "text" id = "namaPemesan" name = "namaPemesan" maxlength = "100" required />
                 </div>
-
                 <div class = "form-group">
                     <label for = "jenKel">Jenis Kelamin</label>
                     <input type = "radio" id = "jenKel" name = "jenKel" value = "Laki-laki" /> Laki - Laki
                     <input type = "radio" id = "jenKel" name = "jenKel" value = "Perempuan" /> Perempuan
                 </div>
-
                 <div class = "form-group">
                     <label for = "noIdentitas">Nomor Identitas</label>
                     <input type = "number" id = "noIdentitas" name = "noIdentitas" maxlength = "60" required />
                 </div>
-
                 <div class = "form-group">
                     <label for = "tipeKamar">Tipe Kamar</label>
-                    <select id = "tipeKamar" name = "tipeKamar" required>
+                    <select id = "tipeKamar" name = "tipeKamar" onchange = "tampilTipe()" required>
                         <option value = "-" selected>---Pilih---</option>
                         <option value = "STD">Standard Room</option>
                         <option value = "DLX">Deluxe Room</option>
@@ -145,40 +173,33 @@
                         <option value = "FMY">Family Room</option>
                     </select>
                 </div>
-
                 <div class = "form-group">
                     <label for = "hargaPesanan">Harga</label>
                     <input type = "number" id = "hargaPesanan" name = "hargaPesanan" readonly />
                 </div>
-
                 <div class = "form-group">
                     <label for = "tglPesanan">Tanggal Pesanan</label>
                     <input type = "date" id = "tglPesanan" name = "tglPesanan" required />
                 </div>
-
                 <div class = "form-group">
                     <label for = "durasiMenginap">Durasi Menginap</label>
-                    <input type = "number" id = "durasiMenginap" name = "durasiMenginap" required />
+                    <input type = "number" id = "durasiMenginap" name = "durasiMenginap" onchange = "hitung()" required />
                     <span>Hari</span>
                 </div>
-
                 <div class = "form-group">
                     <label for = "breakfast">Termasuk Breakfast</label>
-                    <input type = "checkbox" id = "breakfast" name = "breakfast" />
+                    <input type = "checkbox" id = "breakfast" name = "breakfast" onchange = "hitung()" />
                 </div>
-
                 <div class = "form-group">
                     <label for = "totalBiaya">Total Biaya</label>
                     <input type = "text" id = "totalBiaya" name = "totalBiaya" readonly />
                 </div>
-
                 <div class = "button-group">
-                    <button type = "button" class = "save-button">Simpan</button>
+                    <button type = "button" class = "save-button" onclick="simpanData()">Simpan</button>
                     <button type = "reset" class = "cancel-button">Batal</button>
                 </div>
             </form>
         </div>
-
         <div id = "infoContainer"></div>
     </body>
 </html>
